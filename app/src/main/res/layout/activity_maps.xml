@@ -21,11 +21,11 @@ android:orientation="vertical">
 
     <Button
         android:text="Cadastrar Vacinas"
-        android:onClick="currentLocation"
-        android:enabled="false"
+        android:onClick="setNewVaccine"
         android:layout_weight="0"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        />
 
     <Button
         android:id="@+id/button_location"
