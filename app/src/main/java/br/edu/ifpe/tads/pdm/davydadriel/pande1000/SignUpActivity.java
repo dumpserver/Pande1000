@@ -8,6 +8,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import model.User;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -47,10 +51,10 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
 
                     if (task.isSuccessful()) {
-//                        User tempUser = new User(name, email);
-//                        DatabaseReference drUsers = FirebaseDatabase.getInstance().getReference("users");
-//
-//                        drUsers.child(mAuth.getCurrentUser().getUid()).setValue(tempUser);
+                        User tempUser = new User(name, email);
+                        DatabaseReference drUsers = FirebaseDatabase.getInstance().getReference("users");
+
+                        drUsers.child(mAuth.getCurrentUser().getUid()).setValue(tempUser);
                     }
                 });
     }
