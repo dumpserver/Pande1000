@@ -18,10 +18,19 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import model.Vaccine;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -30,6 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean fine_location;
     FirebaseAuth mAuth;
     FirebaseAuthListener authListener;
+    DatabaseReference drVaccines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng recife = new LatLng(-8.05, -34.9);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(recife));
+
+        FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
+
+
+        drVaccines = fbDB.getReference("vaccines");
+
+        drVaccines.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                System.out.println("ChildAdded");
+                Vaccine vaccine = dataSnapshot.getValue(Vaccine.class);
+                System.out.println(vaccine.getLatitude());
+                System.out.println(vaccine.getLongitude());
+                System.out.println(vaccine.getName());
+                mMap = googleMap;
+                LatLng recife = new LatLng(vaccine.getLatitude(), vaccine.getLongitude());
+//                LatLng caruaru = new LatLng(-8.27, -35.98);
+//                LatLng joaopessoa = new LatLng(-7.12, -34.84);
+
+                mMap.addMarker( new MarkerOptions().
+                        position(recife).
+                        title("Recife").
+                        icon(BitmapDescriptorFactory.defaultMarker(35)));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(recife));
+//                mMap.addMarker( new MarkerOptions().
+//                        position(caruaru).
+//                        title("Caruaru").
+//                        icon(BitmapDescriptorFactory.defaultMarker(120)));
+//                mMap.addMarker( new MarkerOptions().
+//                        position(joaopessoa).
+//                        title("João Pessoa").
+//                        icon(BitmapDescriptorFactory.defaultMarker(230)));
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Vaccine vaccine = dataSnapshot.getValue(Vaccine.class);
+                System.out.println("minhas coisas");
+                System.out.println(vaccine.getName());
+
+                LatLng vacineLatLng = new LatLng(vaccine.getLatitude(), vaccine.getLongitude());
+                mMap.addMarker( new MarkerOptions().
+                        position(vacineLatLng).
+                        title(vaccine.getName()).
+                        icon(BitmapDescriptorFactory.defaultMarker(35)));
+            }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
     }
 

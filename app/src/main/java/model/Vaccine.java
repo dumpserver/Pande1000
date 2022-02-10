@@ -15,7 +15,7 @@ public class Vaccine {
         this.latitude = null;
         this.longitude = null;
     }
-    public Vaccine(String user_id, String name, Double longitude, Double latitude) {
+    public Vaccine(String user_id, String name, Double latitude, Double longitude) {
         this.user_id = user_id;
         this.name = name;
         this.longitude = longitude;
