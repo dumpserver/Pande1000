@@ -77,6 +77,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 position(vacineLatLng).
                                 title(vaccine.getName()+" : "+vaccine.getDate()).
                                 icon(BitmapDescriptorFactory.defaultMarker(125)));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(vacineLatLng));
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -88,6 +90,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             position(vacineLatLng).
                             title(vaccine.getName()+" : "+vaccine.getDate()).
                             icon(BitmapDescriptorFactory.defaultMarker(125)));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(vacineLatLng));
             }
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) { }
