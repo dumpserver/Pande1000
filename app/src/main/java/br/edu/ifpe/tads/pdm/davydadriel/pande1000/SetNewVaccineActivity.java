@@ -29,11 +29,6 @@ public class SetNewVaccineActivity extends AppCompatActivity {
     DatabaseReference drUser;
     DatabaseReference drChat;
 
-    Vaccine vaccine;
-
-    Double longitude = 0.0;
-    private double wayLatitude = 0.0, wayLongitude = 0.0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +51,6 @@ public class SetNewVaccineActivity extends AppCompatActivity {
     }
 
     public void addNewVaccine(View view) {
-
-        EditText vaccine_name = findViewById(R.id.vaccine_name);
-
         FusedLocationProviderClient fusedLocationProviderClient =
                 LocationServices.getFusedLocationProviderClient(this);
 
@@ -75,7 +67,6 @@ public class SetNewVaccineActivity extends AppCompatActivity {
     }
 
     private void sendToBase(View view, Double latitude, Double longitude){
-
         FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
         FirebaseUser fbUser = mAuth.getCurrentUser();
         drUser = fbDB.getReference("users/" + fbUser.getUid());
@@ -92,5 +83,4 @@ public class SetNewVaccineActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
 }

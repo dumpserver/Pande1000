@@ -37,6 +37,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     final static int FINE_LOCATION_REQUEST = 1;
     private boolean fine_location;
+
     FirebaseAuth mAuth;
     FirebaseAuthListener authListener;
     DatabaseReference drVaccines;
@@ -50,65 +51,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        requestPermission();
-
-
         this.mAuth = FirebaseAuth.getInstance();
         this.authListener = new FirebaseAuthListener(this);
-    }
 
+        requestPermission();
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng recife = new LatLng(-8.05, -34.9);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(recife));
-
         FirebaseDatabase fbDB = FirebaseDatabase.getInstance();
 
-
+        // Include vaccines in map.
         drVaccines = fbDB.getReference("vaccines");
 
         drVaccines.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("ChildAdded");
                 Vaccine vaccine = dataSnapshot.getValue(Vaccine.class);
-                System.out.println(vaccine.getLatitude());
-                System.out.println(vaccine.getLongitude());
-                System.out.println(vaccine.getName());
-                mMap = googleMap;
-                LatLng recife = new LatLng(vaccine.getLatitude(), vaccine.getLongitude());
-//                LatLng caruaru = new LatLng(-8.27, -35.98);
-//                LatLng joaopessoa = new LatLng(-7.12, -34.84);
 
-                mMap.addMarker( new MarkerOptions().
-                        position(recife).
-                        title("Recife").
-                        icon(BitmapDescriptorFactory.defaultMarker(35)));
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(recife));
-//                mMap.addMarker( new MarkerOptions().
-//                        position(caruaru).
-//                        title("Caruaru").
-//                        icon(BitmapDescriptorFactory.defaultMarker(120)));
-//                mMap.addMarker( new MarkerOptions().
-//                        position(joaopessoa).
-//                        title("João Pessoa").
-//                        icon(BitmapDescriptorFactory.defaultMarker(230)));
+                LatLng vacineLatLng = new LatLng(vaccine.getLatitude(), vaccine.getLongitude());
+                mMap.addMarker(
+                        new MarkerOptions().
+                                position(vacineLatLng).
+                                title(vaccine.getName()).
+                                icon(BitmapDescriptorFactory.defaultMarker(125)));
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Vaccine vaccine = dataSnapshot.getValue(Vaccine.class);
-                System.out.println("minhas coisas");
-                System.out.println(vaccine.getName());
 
                 LatLng vacineLatLng = new LatLng(vaccine.getLatitude(), vaccine.getLongitude());
-                mMap.addMarker( new MarkerOptions().
-                        position(vacineLatLng).
-                        title(vaccine.getName()).
-                        icon(BitmapDescriptorFactory.defaultMarker(35)));
+                mMap.addMarker(
+                        new MarkerOptions().
+                            position(vacineLatLng).
+                            title(vaccine.getName()).
+                            icon(BitmapDescriptorFactory.defaultMarker(125)));
             }
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) { }
@@ -128,9 +107,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                 FINE_LOCATION_REQUEST);
+    }
 
-        if (mMap != null) {
-            mMap.setMyLocationEnabled(this.fine_location);
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        boolean granted = (grantResults.length > 0) &&
+                (grantResults[0] == PackageManager.PERMISSION_GRANTED);
+
+        this.fine_location = (requestCode == FINE_LOCATION_REQUEST) && granted;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authListener);
+
+        // Check Current User
+        if(mAuth.getCurrentUser() != null){
+            // Enable logout button.
+            findViewById(R.id.button_logout).setEnabled(true);
         }
     }
 
@@ -143,5 +139,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void setNewVaccine(View view) {
         Intent intent = new Intent(this, SetNewVaccineActivity.class);
         startActivity(intent);
+    }
+
+    public void logoutUser(View view) {
+        mAuth.signOut();
+        findViewById(R.id.button_logout).setEnabled(false);
     }
 }

@@ -28,9 +28,9 @@ android:orientation="vertical">
         />
 
     <Button
-        android:id="@+id/button_location"
-        android:text="Entrar"
-        android:onClick="currentLocation"
+        android:id="@+id/button_logout"
+        android:text="Logout"
+        android:onClick="logoutUser"
         android:enabled="false"
         android:layout_weight="0"
         android:layout_height="wrap_content"
