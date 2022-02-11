@@ -75,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(
                         new MarkerOptions().
                                 position(vacineLatLng).
-                                title(vaccine.getName()+" : "+vaccine.getDate()).
+                                title(vaccine.getName()+" Data: "+vaccine.getDate()).
                                 icon(BitmapDescriptorFactory.defaultMarker(125)));
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(vacineLatLng));
@@ -88,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(
                         new MarkerOptions().
                             position(vacineLatLng).
-                            title(vaccine.getName()+" : "+vaccine.getDate()).
+                            title(vaccine.getName()+" Data: "+vaccine.getDate()).
                             icon(BitmapDescriptorFactory.defaultMarker(125)));
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(vacineLatLng));

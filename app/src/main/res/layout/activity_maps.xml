@@ -50,7 +50,7 @@ android:orientation="vertical">
 
             android:enabled="false"
             android:onClick="openMyVaccines"
-            android:text="My Vaccines" />
+            android:text="Minhas Vacinas" />
 
         <Button
             android:id="@+id/button_logout"
@@ -62,7 +62,7 @@ android:orientation="vertical">
 
             android:enabled="false"
             android:onClick="logoutUser"
-            android:text="Logout" />
+            android:text="Sair" />
     </LinearLayout>
 </LinearLayout>
 
