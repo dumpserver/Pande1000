@@ -150,6 +150,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void logoutUser(View view) {
         mAuth.signOut();
         findViewById(R.id.button_logout).setEnabled(false);
+        findViewById(R.id.button_my_vaccines).setEnabled(false);
     }
 
     public void openMyVaccines(View view) {
