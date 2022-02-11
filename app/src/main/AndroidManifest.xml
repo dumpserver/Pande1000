@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pande1000">
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".MyVaccines">
+        </activity>
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SetNewVaccineActivity" />
         <!--

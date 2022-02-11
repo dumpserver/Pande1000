@@ -127,6 +127,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(mAuth.getCurrentUser() != null){
             // Enable logout button.
             findViewById(R.id.button_logout).setEnabled(true);
+            // Enable my vaccines button.
+            findViewById(R.id.button_my_vaccines).setEnabled(true);
         }
     }
 
@@ -144,5 +146,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void logoutUser(View view) {
         mAuth.signOut();
         findViewById(R.id.button_logout).setEnabled(false);
+    }
+
+    public void openMyVaccines(View view) {
+        Intent intent = new Intent(this, MyVaccines.class);
+        startActivity(intent);
     }
 }

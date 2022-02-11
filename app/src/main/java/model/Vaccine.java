@@ -4,14 +4,14 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
 public class Vaccine {
-    private final String user_id;
+    private final String userId;
     private final String name;
     private final String date;
     private final Double latitude;
     private final Double longitude;
 
     public Vaccine() {
-        this.user_id = null;
+        this.userId = null;
         this.name = null;
         this.date = null;
         this.latitude = null;
@@ -19,7 +19,7 @@ public class Vaccine {
     }
 
     public Vaccine(String user_id, String name, String date, Double latitude, Double longitude) {
-        this.user_id = user_id;
+        this.userId = user_id;
         this.name = name;
         this.date = date;
         this.longitude = longitude;
@@ -27,7 +27,7 @@ public class Vaccine {
     }
 
     public String getUserId() {
-        return user_id;
+        return userId;
     }
 
     public String getName() {
