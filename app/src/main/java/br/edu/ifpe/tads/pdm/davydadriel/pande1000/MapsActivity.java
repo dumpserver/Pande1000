@@ -75,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(
                         new MarkerOptions().
                                 position(vacineLatLng).
-                                title(vaccine.getName()).
+                                title(vaccine.getName()+" : "+vaccine.getDate()).
                                 icon(BitmapDescriptorFactory.defaultMarker(125)));
             }
             @Override
@@ -86,7 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(
                         new MarkerOptions().
                             position(vacineLatLng).
-                            title(vaccine.getName()).
+                            title(vaccine.getName()+" : "+vaccine.getDate()).
                             icon(BitmapDescriptorFactory.defaultMarker(125)));
             }
             @Override

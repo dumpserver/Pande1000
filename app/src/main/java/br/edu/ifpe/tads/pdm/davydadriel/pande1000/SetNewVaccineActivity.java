@@ -19,6 +19,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import model.Vaccine;
 
 public class SetNewVaccineActivity extends AppCompatActivity {
@@ -73,9 +77,13 @@ public class SetNewVaccineActivity extends AppCompatActivity {
         drChat = fbDB.getReference("vaccines");
         EditText vaccine_name = findViewById(R.id.vaccine_name);
 
+        // Get current date.
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
         drChat.push().setValue(new Vaccine(
             fbUser.getUid(),
             vaccine_name.getText().toString(),
+            currentDate,
             latitude,
             longitude));
 
