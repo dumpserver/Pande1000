@@ -32,6 +32,8 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
+        android:backgroundTint="#1B1A1A"
+        android:textColor="@android:color/white"
         />
 
 

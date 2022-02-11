@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Pande1000</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="brew_array">
+        <item></item>
+        <item>Pfizer</item>
+        <item>CoronaVac</item>
+        <item>Johnson</item>
+        <item>AstraZeneca</item>
+    </string-array>
+
 </resources>

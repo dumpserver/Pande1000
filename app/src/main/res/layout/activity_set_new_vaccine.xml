@@ -9,18 +9,28 @@
     tools:context=".SetNewVaccineActivity"
     >
 
-    <EditText
-        android:id="@+id/vaccine_name"
+<!--    <EditText-->
+<!--        android:id="@+id/vaccine_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="text"-->
+<!--        android:hint="Nome da Vacina" />-->
+
+    <Spinner
+        android:id="@+id/vaccine_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Nome da Vacina" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="addNewVaccine"
-        android:text="Cadastrar Nova Vacina"/>
+        android:text="Cadastrar Nova Vacina"
+        android:backgroundTint="#1B1A1A"
+        android:textColor="@android:color/white"
+        />
 
 
 </LinearLayout>

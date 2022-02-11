@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:text="Entrar"
         android:onClick="buttonSignInClick"
+        android:backgroundTint="#1B1A1A"
+        android:textColor="@android:color/white"
         />
 
     <Button
@@ -35,6 +37,8 @@
         android:layout_height="wrap_content"
         android:text="Sou novo aqui"
         android:onClick="buttonSignUpClick"
+        android:backgroundTint="#1B1A1A"
+        android:textColor="@android:color/white"
         />
 
 </LinearLayout>

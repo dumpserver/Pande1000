@@ -35,6 +35,8 @@
         android:layout_height="wrap_content"
         android:text="Cadastrar"
         android:onClick="buttonSignUpClick"
+        android:backgroundTint="#1B1A1A"
+        android:textColor="@android:color/white"
         />
 
 </LinearLayout>
